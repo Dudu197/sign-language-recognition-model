@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Gomes Reddo Alves
+    given-names: Carlos Eduardo
+  - family-names: M Paixão
+    given-names: Thiago
+title: "Enhancing Brazilian Sign Language Recognition Through Skeleton Image Representation"
+version: 2.0.4
+identifiers:
+  - type: doi
+    value: 10.1109/SIBGRAPI62404.2024.10716301
+date-released: 2021-08-11
