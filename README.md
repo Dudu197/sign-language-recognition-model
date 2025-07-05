@@ -88,33 +88,7 @@ sh train.sh
 
 This will train the model and save results in the `results` folder.
 
-### Custom Training & Other Datasets
-
-- The main training logic is in `model_training.py`.
-- You can run it directly and specify dataset paths or parameters as needed:
-
-```bash
-python model_training.py
-```
-
-- For MINDS-Libras, the default scripts expect the data in the `datasets` folder.
-- To train on other datasets (e.g., Include-50, KSL, Libras-UFOP):
-  1. Download and place the preprocessed dataset CSV in the `datasets` folder.
-  2. Adjust the dataset path in the training script or in `model_training.py` as needed.
-  3. You may need to adapt preprocessing or label mapping depending on the dataset format.
-
-### Hyperparameters
-
-- Hyperparameters (e.g., batch size, learning rate, epochs) can be set in the training scripts or directly in `model_training.py`.
-- For quick experiments, edit the values at the top of `model_training.py` or in `train_minds.py`.
-
-### Example: Training with a Custom Dataset
-
-```bash
-python model_training.py --dataset_path datasets/your_dataset.csv --epochs 50 --batch_size 32
-```
-
-> **Tip:** Check the script for available command-line arguments or edit the script to add your own.
+For more details about how to train, check [https://github.com/Dudu197/sign-language-recognition/blob/main/03_model_training/README.md](https://github.com/Dudu197/sign-language-recognition/blob/main/03_model_training/README.md)
 
 ---
 
