@@ -1,33 +1,163 @@
 # Sign Language Recognition Model
 
-This repository contains the code for training a Sign Language Recognition (SLR) model based on skeleton images.
+Enhancing Brazilian Sign Language Recognition through Skeleton Image Representation
 
-This is a simpler version of the original code, which was designed for experiments. We are working to make it more user-friendly.
+---
 
-If you would like to know more about the original code, please check the [original repository](https://github.com/Dudu197/sign-language-recognition).
+## Overview
 
-# How to use
+This repository contains a simplified version of the code for training a Sign Language Recognition (SLR) model based on skeleton images, as described in the paper:
 
-## Requirements
+> **Alves, Carlos Eduardo GR, Francisco de Assis Boldt, and Thiago M. Paixão. "Enhancing Brazilian Sign Language Recognition through Skeleton Image Representation." arXiv preprint arXiv:2404.19148 (2024).**
 
-Install the requirements using the following command:
+This version is designed for quick-start experiments and user-friendliness. For the full experimental codebase, see the [original repository](https://github.com/Dudu197/sign-language-recognition).
 
+---
+
+## Table of Contents
+- [Overview](#overview)
+- [Requirements & Installation](#requirements--installation)
+- [Dataset](#dataset)
+- [Directory Structure](#directory-structure)
+- [Training](#training)
+- [Results](#results)
+- [Citation](#citation)
+- [License](#license)
+
+---
+
+## Requirements & Installation
+
+- **Python 3.7+**
+- All required libraries are listed in `requirements.txt`.
+
+**Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
+---
+
 ## Dataset
 
-The code was tested using the MINDS-Libras dataset. It can be downloaded [here](https://drive.google.com/file/d/1qx2JudpjPgpp4-fpJ7YVMrszWV4lYPCd/view?usp=drive_link).
+This code was tested using the MINDS-Libras dataset, but can be adapted for other sign language datasets as well:
 
-The code expects the dataset to be in `datasets` folder.
+### MINDS-Libras
+- 20 signs, 12 signers, 5 repetitions per sign.
+- [Download preprocessed MINDS-Libras data](https://drive.google.com/file/d/1qx2JudpjPgpp4-fpJ7YVMrszWV4lYPCd/view?usp=drive_link)
+- Place the dataset in the `datasets` folder.
+
+### Libras-UFOP
+- 56 signs, 5 signers, 8–16 repetitions per sign.
+- [Paper](https://www.sciencedirect.com/science/article/pii/S0957417420309143)
+- Preprocessed data may be available in the original repository or by request.
+
+### Include-50
+- 50 signs, larger and more diverse dataset.
+- [Download preprocessed Include-50 data](https://drive.google.com/file/d/14SbYpFIbHi_Is1hD9XH9Sg_5eF--xtAw/view?usp=sharing)
+- Place the dataset in the `datasets` folder.
+
+### KSL (Korean Sign Language)
+- Korean Sign Language dataset.
+- [Download preprocessed KSL data](https://drive.google.com/file/d/1-27qX-KtCE3RknzASvXuJ-aVZAQ60tNj/view?usp=sharing)
+- Place the dataset in the `datasets` folder.
+
+> **Note:** This repository is primarily set up for MINDS-Libras, but you can adapt the code for other datasets by adjusting file paths and preprocessing as needed.
+
+---
+
+## Directory Structure
+
+- `datasets/` – Place your dataset files here.
+- `image_representations/` – Skeleton image representation code.
+- `models/` – Model definitions (e.g., ResNet18).
+- `results/` – Results and logs will be saved here.
+- `model_training.py` – Main training script.
+- `train_minds.py` – Example training script for MINDS-Libras.
+- `train.sh` – Shell script to run training.
+
+---
 
 ## Training
 
-To train the model, you can use the following command:
+To train the model using the MINDS-Libras dataset, run:
 
 ```bash
 sh train.sh
 ```
 
-The script will train the model using the MINDS-Libras dataset and save the results in the `results` folder.
+This will train the model and save results in the `results` folder.
+
+### Custom Training & Other Datasets
+
+- The main training logic is in `model_training.py`.
+- You can run it directly and specify dataset paths or parameters as needed:
+
+```bash
+python model_training.py
+```
+
+- For MINDS-Libras, the default scripts expect the data in the `datasets` folder.
+- To train on other datasets (e.g., Include-50, KSL, Libras-UFOP):
+  1. Download and place the preprocessed dataset CSV in the `datasets` folder.
+  2. Adjust the dataset path in the training script or in `model_training.py` as needed.
+  3. You may need to adapt preprocessing or label mapping depending on the dataset format.
+
+### Hyperparameters
+
+- Hyperparameters (e.g., batch size, learning rate, epochs) can be set in the training scripts or directly in `model_training.py`.
+- For quick experiments, edit the values at the top of `model_training.py` or in `train_minds.py`.
+
+### Example: Training with a Custom Dataset
+
+```bash
+python model_training.py --dataset_path datasets/your_dataset.csv --epochs 50 --batch_size 32
+```
+
+> **Tip:** Check the script for available command-line arguments or edit the script to add your own.
+
+---
+
+## Results
+
+Our model achieves strong performance on multiple sign language datasets:
+
+- **MINDS-Libras:**
+  - Accuracy: ~0.93
+  - +2 percentage points accuracy, +3 F1-Score over previous SOTA
+
+- **Libras-UFOP:**
+  - Accuracy: ~0.82
+  - +8 percentage points accuracy, +9 F1-Score over previous SOTA
+
+- **Include-50:**
+  - Accuracy: ~0.97 (ResNet18 + Skeleton-DML)
+
+- **KSL (Korean Sign Language):**
+  - Accuracy: ~0.63 (ResNet18 + Skeleton-DML)
+
+For more results and details, see the [original paper](https://arxiv.org/abs/2404.19148).
+
+---
+
+## Citation
+
+If you use this code for your research, please cite our paper:
+
+> Alves, Carlos Eduardo GR, Francisco de Assis Boldt, and Thiago M. Paixão. "Enhancing Brazilian Sign Language Recognition through Skeleton Image Representation." arXiv preprint arXiv:2404.19148 (2024).
+
+**BibTeX:**
+```bibtex
+@article{alves2024enhancing,
+  title={Enhancing Brazilian Sign Language Recognition through Skeleton Image Representation},
+  author={Alves, Carlos Eduardo GR and Boldt, Francisco de Assis and Paix{a}o, Thiago M},
+  journal={arXiv preprint arXiv:2404.19148},
+  year={2024}
+}
+```
+
+---
+
+## License
+
+This project is licensed under the terms of the MIT License.
